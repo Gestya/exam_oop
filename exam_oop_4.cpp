@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <vector>
 #include <functional>
 #include <thread>
@@ -27,8 +27,7 @@ bool operator != (const Part& a, const Part& b)
 
 
 template<class T>
-void quick_sort(T* a, size_t low, size_t high,
-	const std::function<bool(const T&, const T&)>& cmp_fun)
+void quick_sort(T* a, size_t low, size_t high, const std::function<bool(const T&, const T&)>& cmp_fun)
 {
 	if (low >= high)
 		return;
@@ -58,14 +57,6 @@ void quick_sort(T* a, size_t low, size_t high,
 	quick_sort(a, j + 1, high, cmp_fun);
 }
 
-
-template<class T>
-void wrapped_quick_sort(std::vector<T>& input, const std::function<bool(const T&, const T&)>& cmp_fun)
-{
-	quick_sort<Part>(input.data(), 0, input.size() - 1, cmp_fun);
-}
-
-
 template<class T>
 void selecting_sort(T* a, int low, int high,
 	const std::function<bool(const T&, const T&)>& cmp_fun)
@@ -93,21 +84,13 @@ void selecting_sort(T* a, int low, int high,
 	}
 }
 
-
-template<class T>
-void wrapped_selecting_sort(std::vector<T>& input, const std::function<bool(const T&, const T&)>& cmp_fun)
-{
-	selecting_sort<Part>(input.data(), 0, input.size() - 1, cmp_fun);
-}
-
-
 std::vector<Part> get_random_array(size_t cnt)
 {
 	std::vector<Part> result;
 	for (size_t i = 0; i < cnt; ++i)
 	{
 		uint32_t id = rand();
-		int weight = rand() % 5;
+		int weight = rand() % 5 + 1;
 		Part part{ id, weight };
 		result.emplace_back(part);
 	}
